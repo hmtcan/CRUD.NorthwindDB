@@ -14,8 +14,12 @@ namespace CRUDNorthwindDB.BusinessLayer
     {
 		public int SupplierID { get; set; }
 
+		// Kapsülleme (encapsulation)
 		public string _CompanyName { get; set; }
-        
+        public string CompanyName { 
+            get { return _CompanyName; }
+            set { _CompanyName = value.ToUpper(); }
+        }
         public string Address { get; set; }
 
         public bool Save()
@@ -100,7 +104,7 @@ namespace CRUDNorthwindDB.BusinessLayer
 				SqlCommand sqlcmd = new SqlCommand("sp_supplier_update", sqlcon);
 				sqlcmd.CommandType = System.Data.CommandType.StoredProcedure;
 
-				sqlcmd.Parameters.AddWithValue("@CompanyName", _CompanyName);
+				sqlcmd.Parameters.AddWithValue("@CompanyName", CompanyName);
 				sqlcmd.Parameters.AddWithValue("@Address", Address);
 				sqlcmd.Parameters.AddWithValue("@SupplierID", SupplierID);
 
